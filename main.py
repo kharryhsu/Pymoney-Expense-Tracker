@@ -1,7 +1,7 @@
 import sys
 import os
 
-FILE_PATH = './records.txt'
+FILE_PATH = './records.txt' # The path to the records file
 
 class Record:
     """Represent a financial record."""
@@ -238,29 +238,23 @@ class Categories:
         return False
     
     def find_subcategories(self, category_name, categories):
-        """Find subcategories for a given category."""
-        if type(categories) == list:
-            for item in categories:
-                if item == category_name:
-                    idx = categories.index(item)
-                    subcategories = categories[idx + 1] if idx + 1 < len(categories) and type(categories[idx + 1]) == list else []
-                    return [category_name] + self._flatten(subcategories)
-                
-                if type(item) == list:
-                    result = self.find_subcategories(category_name, item)
-                    if result:
-                        return result
-        return []
+        def find_subcategories_gen(category, categories, found=False):
+            if type(categories) == list:
+                for index, child in enumerate(categories):
+                    # Recursively process each child, updating the "found" flag as needed
+                    yield from find_subcategories_gen(category, child, found)
+                    
+                    # If the current child matches the target category
+                    if child == category and index + 1 < len(categories) and type(categories[index + 1]) == list:
+                        # Recursively process subcategories with the "found" flag set to True
+                        yield from find_subcategories_gen(category, categories[index + 1], True)
+            else:
+                # Yield the target category or any subcategories if "found" is True
+                if categories == category or found:
+                    yield categories
 
-    def _flatten(self, L):
-        """Flatten a nested list into a single list."""
-        if type(L) == list:
-            result = []
-            
-            for item in L:
-                result.extend(self._flatten(item))
-            return result
-        return [L]
+        # Return a list of all subcategories found
+        return [i for i in find_subcategories_gen(category_name, categories)]
     
 records = Records()
 categories = Categories()
