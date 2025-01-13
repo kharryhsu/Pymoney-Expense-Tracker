@@ -2,6 +2,8 @@
 
 This program is a simple financial records management tool made by python that allows users to track expenses and incomes. Users can add, view, delete, and search for records by category, manage their budget, and view a predefined category hierarchy.
 
+---
+
 ## Features
 
 - **Add Records**: Add expense or income records with category, description, and amount.
@@ -12,6 +14,8 @@ This program is a simple financial records management tool made by python that a
 - **Error Handling**: Handles various invalid inputs gracefully, such as file errors, invalid formats, and more.
 - **Persistent Storage**: Records are saved to a file (`records.txt`) and loaded upon restart.
 
+---
+
 ## Commands
 
 - `add`: Add new records. Input format: `cat1 desc1 amt1, cat2 desc2 amt2, ...`
@@ -21,10 +25,14 @@ This program is a simple financial records management tool made by python that a
 - `find`: Search for records under a specific category or its subcategories.
 - `exit`: Save all records to `records.txt` and exit the program.
 
+---
+
 ## File Format (`records.txt`)
 
 - **First Line**: Stores the initial balance (integer).
 - **Subsequent Lines**: Each line represents a record in the format:
+
+---
 
 ## Example Workflow
 
@@ -36,8 +44,17 @@ This program is a simple financial records management tool made by python that a
 6. Use `find` to filter records by category.
 7. Exit the program to save all changes.
 
+---
+
 ## Future Enhancements
 
 - Allow dynamic addition and removal of categories.
 - Add export functionality to generate reports.
 - Implement a graphical user interface (GUI).
+
+---
+
+## Contributions
+
+We welcome contributions! 🎉  
+If you have ideas, suggestions, or improvements, feel free to fork this repository and submit a pull request.  
